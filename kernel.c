@@ -89,7 +89,8 @@ enum Commands {
 
 	REBOOT,
 
-	CLEAR
+	CLEAR,
+        TEST
 } Commands;
 
 void EverySecond(void) {
@@ -400,7 +401,7 @@ void main(uint32 magic, struct multibootInfo* bootInfoArg) {
 
 	uint32 (*program) (uint32, uint32) = (void*)(address); // Program definition
 
-	UGSMASCIIputString("Random OS --> ");
+	UGSMASCIIputString("RandomOS --> ");
 
 	swap();
 
@@ -508,6 +509,7 @@ void main(uint32 magic, struct multibootInfo* bootInfoArg) {
 								UGSMASCIIputString("\treboot --> Restarts the computer\n");
 
 								UGSMASCIIputString("\tclear --> Clears the console\n");
+								UGSMASCIIputString("\tPRM --> print sysInfo\n");
 							}
 
 							else if (command == ECHO) {
@@ -603,8 +605,50 @@ void main(uint32 magic, struct multibootInfo* bootInfoArg) {
 
 								reboot();
 							}
+                                                        else if (command == PRM) 
+								UGSMASCIIputString("0.0.9 global version \n");
+                                                                if (RAMSize.gigabytes != 0) {
+		foregroundColor = 0xffff00;
 
-							else if (command == CLEAR) {
+		putUX16Integer(RAMSize.gigabytes);
+
+		foregroundColor = 0x00ff00;
+
+		UGSMASCIIputString(" gigabytes\n");
+	}
+
+	if (RAMSize.megabytes != 0) {
+		foregroundColor = 0xffff00;
+
+		putUX16Integer(RAMSize.megabytes);
+
+		foregroundColor = 0x00ff00;
+
+		UGSMASCIIputString(" megabytes\n");
+	}
+
+	if (RAMSize.kilobytes != 0) {
+		foregroundColor = 0xffff00;
+
+		putUX16Integer(RAMSize.kilobytes);
+
+		foregroundColor = 0x00ff00;
+
+		UGSMASCIIputString(" kilobytes\n");
+	}
+
+	if (RAMSize.bytes != 0) {
+		foregroundColor = 0xffff00;
+
+		putUX16Integer(RAMSize.bytes);
+
+		foregroundColor = 0x00ff00;
+
+		UGSMASCIIputString(" bytes\n");
+	}
+
+							}
+   	   						else if (command == CLEAR) {
 								clear(backgroundColor);
 
 								EverySecond();
