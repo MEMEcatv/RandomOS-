@@ -90,7 +90,7 @@ enum Commands {
 	REBOOT,
 
 	CLEAR,
-        TEST
+        SYSINFO
 } Commands;
 
 void EverySecond(void) {
@@ -605,7 +605,7 @@ void main(uint32 magic, struct multibootInfo* bootInfoArg) {
 
 								reboot();
 							}
-                                                        else if (command == PRM) 
+                                                        else if (command == SYSINFO) 
 								UGSMASCIIputString("0.0.9 global version \n");
                                                                 if (RAMSize.gigabytes != 0) {
 		foregroundColor = 0xffff00;
