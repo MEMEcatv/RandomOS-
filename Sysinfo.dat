@@ -2,8 +2,8 @@
   #include filessystem.c
 RAM -kernelinfo
  sysdisc -filesystem
-  while true (
-if kernel edit sysinfo.dat
+  section .service 
+  move data to void
   update
-  )
+  
   
